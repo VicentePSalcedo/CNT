@@ -1,13 +1,8 @@
 import java.net.*;
 import java.io.*;
  
-/**
- * This program demonstrates a simple TCP/IP socket client that reads input
- * from the user and prints echoed message from the server.
- *
- * @author www.codejava.net
- */
-public class ReverseClient {
+
+public class Client {
  
     public static void main(String[] args) {
         if (args.length < 2) return;

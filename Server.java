@@ -2,13 +2,7 @@ import java.io.*;
 import java.net.*;
 import java.util.Date;
  
-/**
- * This program demonstrates a simple TCP/IP socket server that echoes every
- * message from the client in reversed form.
- * This server is single-threaded.
- *
- * @author www.codejava.net
- */
+
 public class Server {
  
     public static void main(String[] args) {
@@ -36,13 +30,7 @@ public class Server {
                 do {
                     text = reader.readLine();
                     String reverseText = new StringBuilder(text).reverse().toString();
-                    writer.println("Server: " + text);
-                    if(text=="1"){
-                        writer.println(new Date().toString());
-                    }
-                    else{
-                        writer.println("Inccorect Operation Option Sumbited.");
-                    }
+                    writer.println("Server: " + reverseText);
  
                 } while (!text.equals("bye"));
  
