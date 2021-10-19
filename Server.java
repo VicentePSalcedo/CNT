@@ -25,7 +25,7 @@ public class Server {
                 OutputStream output = socket.getOutputStream();
                 PrintWriter writer = new PrintWriter(output, true);
  
-                String s = null;
+                // String s = null;
                 String text;
  
                 do {
@@ -33,45 +33,17 @@ public class Server {
                     // parse option from client to integer for evaluation
                     int option = Integer.parseInt(text);
                     if (option == 1){
-                        writer.println("Server: " + text);
-                    } else if(option ==2 ){
                         writer.println(new Date().toString());
-                    } else if(option == 3){
+                    } else if(option ==2 ){
                         long endTime = System.nanoTime();
                         long duration = (endTime - startTime);
                         writer.println(duration);
+                    } else if(option == 3){
+                        long UsedMem=Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
+                        writer.println(UsedMem);
                     } else if(option == 4){
-                        try {
-            
-                            // run the Unix "ps -ef" command
-                                // using the Runtime exec method:
-                                Process p = Runtime.getRuntime().exec("ps -ef");
-                                
-                                BufferedReader stdInput = new BufferedReader(new 
-                                     InputStreamReader(p.getInputStream()));
-                    
-                                BufferedReader stdError = new BufferedReader(new 
-                                     InputStreamReader(p.getErrorStream()));
-                    
-                                // read the output from the command
-                                System.out.println("Here is the standard output of the command:\n");
-                                while ((s = stdInput.readLine()) != null) {
-                                    System.out.println(s);
-                                }
-                                
-                                // read any errors from the attempted command
-                                System.out.println("Here is the standard error of the command (if any):\n");
-                                while ((s = stdError.readLine()) != null) {
-                                    System.out.println(s);
-                                }
-                                
-                                System.exit(0);
-                            }
-                            catch (IOException e) {
-                                System.out.println("exception happened - here's what I know: ");
-                                e.printStackTrace();
-                                System.exit(-1);
-                            }
+                        long UsedMem=Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
+                        writer.println(UsedMem);
                     } else {
                         writer.println("Wrong Answer." + "'" + text + "'");
                     }
