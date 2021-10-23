@@ -7,7 +7,6 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
-import java.util.Scanner;
 
 public class Server {
  
@@ -51,6 +50,7 @@ public class Server {
                         break;
                 }
                 writer.println(outputString);
+                socket.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
