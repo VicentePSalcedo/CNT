@@ -98,6 +98,7 @@ public class Server {
     }
 
     static String netStat(){
+        System.out.println("Net Work Status requested");
         String currentLine = "";
         String netStatString = "";
         try {
@@ -110,13 +111,23 @@ public class Server {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Net Work Status requested");
         return netStatString;
     }
 
-    static String currentUsers(){
+    static String currentUsers(){ 
         System.out.println("Current Users Requested");
-        return "5 is not setup yet";
+        String currentLine = "";
+        String currentUserString = "";
+        try{
+            Process CurrentUsers = Runtime.getRuntime().exec("WMIC /NODE:localhost COMPUTERSYSTEM GET USERNAME");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(CurrentUsers.getInputStream()));
+            while ((currentLine = reader.readLine()) != null){
+                currentUserString = currentUserString + currentLine + "\n";
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return currentUserString;
     }
 
     static String runningProcess(){
