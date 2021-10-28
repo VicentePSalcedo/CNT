@@ -26,7 +26,6 @@ public class Server {
                 OutputStream output = socket.getOutputStream();
                 PrintWriter writer = new PrintWriter(output, true);
                 
-                
                 String userInputString;
                 Integer userInputInteger;
 
@@ -37,7 +36,7 @@ public class Server {
                 serverOutputString = optionLogic(userInputInteger, startTime);
 
                 writer.println(serverOutputString);
-
+                
                 socket.close();
                 System.out.println("Client disconected.");
             }
@@ -45,6 +44,7 @@ public class Server {
             e.printStackTrace();
         }
     }
+    
     static String optionLogic(Integer userInputInteger, long startTime){
         String output;
         switch (userInputInteger) {
@@ -74,31 +74,34 @@ public class Server {
     }
     
     static String dateAndTime(){
-        System.out.println("Date and Time Requested");
+        System.out.println("Date and Time Requested\nPlease wait...");
         String date = "";
         date = new Date().toString();
+        System.out.println("Done.");
         return date;
     }
 
     static String upTime(long startTime){
-        System.out.println("Uptime Requested");
+        System.out.println("Uptime Requested\nPlease wait...");
         String totalTimeString = "";
         long endTime   = System.nanoTime();
         long totalTime = endTime - startTime;
         totalTimeString = Long.toString(totalTime);
+        System.out.println("Done.");
         return totalTimeString;
     }
     
     static String memoryUse(){
-        System.out.println("Memory Use Requested");
+        System.out.println("Memory Use Requested\nPlease wait...");
         String usedMemString = "";
         long usedMem=Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
         usedMemString = Long.toString(usedMem);
+        System.out.println("Done.");
         return usedMemString;
     }
 
     static String netStat(){
-        System.out.println("Net Work Status requested");
+        System.out.println("Net Work Status requested\nPlease wait...");
         String currentLine = "";
         String netStatString = "";
         try {
@@ -111,11 +114,12 @@ public class Server {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Done.");
         return netStatString;
     }
 
     static String currentUsers(){ 
-        System.out.println("Current Users Requested");
+        System.out.println("Current Users Requested\nPlease wait...");
         String currentLine = "";
         String currentUserString = "";
         try{
@@ -127,11 +131,12 @@ public class Server {
         } catch (IOException e){
             e.printStackTrace();
         }
+        System.out.println("Done.");
         return currentUserString;
     }
 
     static String runningProcess(){
-        System.out.println("Running Process");
+        System.out.println("Running Process\nPlease wait...");
         String currentLine = "";
         String runningProcessString = "";
         try {
@@ -144,6 +149,7 @@ public class Server {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Done.");
         return runningProcessString;
     }
 
