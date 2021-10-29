@@ -1,0 +1,3 @@
+22 milliseconds
+49 milliseconds
+101280 milliseconds

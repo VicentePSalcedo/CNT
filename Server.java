@@ -11,7 +11,7 @@ import java.util.Date;
 public class Server {
  
     public static void main(String[] args) {
-        long startTime = System.nanoTime();
+        long startTime = System.currentTimeMillis();
         String serverOutputString;
         try {
             ServerSocket serverSocket = new ServerSocket(6868);
@@ -41,6 +41,7 @@ public class Server {
                 System.out.println("Client disconected.");
             }
         } catch (IOException e) {
+            System.out.println("An error occured while establishing a new client connection.");
             e.printStackTrace();
         }
     }
@@ -78,17 +79,17 @@ public class Server {
         String date = "";
         date = new Date().toString();
         System.out.println("Done.");
-        return date;
+        return "Date and Time Request: " + date;
     }
 
     static String upTime(long startTime){
         System.out.println("Uptime Requested\nPlease wait...");
         String totalTimeString = "";
-        long endTime   = System.nanoTime();
+        long endTime   = System.currentTimeMillis();
         long totalTime = endTime - startTime;
         totalTimeString = Long.toString(totalTime);
         System.out.println("Done.");
-        return totalTimeString;
+        return "Up Time Request: " + totalTimeString + " milliseconds";
     }
     
     static String memoryUse(){
@@ -97,7 +98,7 @@ public class Server {
         long usedMem=Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
         usedMemString = Long.toString(usedMem);
         System.out.println("Done.");
-        return usedMemString;
+        return "Memory usage request: " + usedMemString + "MB";
     }
 
     static String netStat(){
@@ -113,9 +114,10 @@ public class Server {
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("An error occured while attempting to retrive network status.");
         }
         System.out.println("Done.");
-        return netStatString;
+        return "Network Status Request: " + netStatString;
     }
 
     static String currentUsers(){ 
@@ -130,9 +132,10 @@ public class Server {
             }
         } catch (IOException e){
             e.printStackTrace();
+            System.out.println("An error occured while attempting to retrive current users.");
         }
         System.out.println("Done.");
-        return currentUserString;
+        return "Current User Request: " + currentUserString;
     }
 
     static String runningProcess(){
@@ -148,9 +151,9 @@ public class Server {
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("An error occured while attempting to retrive current processes.");
         }
         System.out.println("Done.");
-        return runningProcessString;
+        return "Running Process Request: " + runningProcessString;
     }
-
 }

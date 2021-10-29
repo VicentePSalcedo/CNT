@@ -1,4 +1,6 @@
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -10,82 +12,78 @@ import java.util.Scanner;
 public class Client {
  
     public static void main(String[] args) {
-        long totalStartTime;
-        long totalEndTime;
-        long totalTime;
+        try{
+            File file = new File("log.txt");
+            if (file.delete()){
+                file.createNewFile();
+            } else {
+                file.createNewFile();
+            }
+        } catch (IOException e){
+            System.out.println("An error occurred creating new log file.");
+            e.printStackTrace();
+        }
         
-        long individualStartTime;
-        long individualEndTime;
-        long individualTime = 0;
-        long individualSumTime = 0;
-        long averageTime;
-
+        Integer threadsInteger;
         Scanner scanner = new Scanner(System.in);
         System.out.println("How many threads would you like to spawn?");
-        Integer threadsInteger = scanner.nextInt();
+        threadsInteger = scanner.nextInt();
         scanner.close();
-        
-        totalStartTime = System.nanoTime();
         
         for (int threads = 0; threads < threadsInteger; threads++) {
             
-            individualStartTime = System.nanoTime();
-            
             Multithreading object = new Multithreading();
+            
             object.start();
-            
-            individualEndTime = System.nanoTime();
-            
-            individualTime = individualEndTime - individualStartTime;
-            
-            System.out.println("Turn Around Time for this request: " + individualTime);
-
-            individualSumTime = individualSumTime + individualTime;
-        
         }
-        
-        totalEndTime   = System.nanoTime();
-        
-        totalTime = totalEndTime - totalStartTime;
-        
-        averageTime = individualSumTime / threadsInteger;
-
-        System.out.println("Total Turn Around Time: " + totalTime);
-        System.out.println("Average Turn Around Time: " + averageTime);
     }
 }
 
 class Multithreading extends Thread {
     public void run(){
         try {
-            try {
-                Socket socket = new Socket("localhost", 6868);
+            
+            Socket socket = new Socket("localhost", 6868);
+            long startTime = System.currentTimeMillis();
+            InputStream input = socket.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+            
+            OutputStream output = socket.getOutputStream();
+            PrintWriter writer = new PrintWriter(output, true);
+            
+            Integer userInput;
+            String serverOutpuString;
+            
+            userInput = getRandomNumber(1,6);
+
+            writer.println(userInput);
+            
+            serverOutpuString = ReadBigString(reader);
+            
+            System.out.println(serverOutpuString);
                 
-                InputStream input = socket.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-                
-                OutputStream output = socket.getOutputStream();
-                PrintWriter writer = new PrintWriter(output, true);
-                
-                Integer userInput;
-                String serverOutpuString;
-                
-                userInput = getRandomNumber(1,6);
-    
-                writer.println(userInput);
-                
-                serverOutpuString = ReadBigString(reader);
-                
-                System.out.println(serverOutpuString);
-                    
-                socket.close();
-                
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            socket.close();
+            
+            long endTime = System.currentTimeMillis();
+            long totalTime = endTime - startTime;
+
+            recordLog(totalTime);
+            
+            System.out.println("Took " + totalTime + " milliseconds\n");
+
+        } catch (IOException e) {
+            System.out.println("An error occurred while creating new thread.");
+            e.printStackTrace();
         }
-        catch (Exception e) {
-            System.out.println("Exception is caught");
+    }
+    static void recordLog(long totalTime){
+        try{
+            FileWriter logFileWriter = new FileWriter("log.txt", true);
+            logFileWriter.write(totalTime + " milliseconds\n");
+            logFileWriter.close();
+        } catch (IOException e){
+            System.out.println("An error occurred while writing to log file.");
+            e.printStackTrace();
         }
     }
 
