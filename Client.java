@@ -7,11 +7,13 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Client {
  
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         try{
             File file = new File("log.txt");
             if (file.delete()){
@@ -28,18 +30,48 @@ public class Client {
         Scanner scanner = new Scanner(System.in);
         System.out.println("How many threads would you like to spawn?");
         threadsInteger = scanner.nextInt();
+        Integer requestTypeInteger;
+        System.out.println("What kind of requests?");
+        requestTypeInteger = scanner.nextInt();
         scanner.close();
         
+        List<Thread> threadCount = new ArrayList<>();
+        long startTime = System.currentTimeMillis();
         for (int threads = 0; threads < threadsInteger; threads++) {
-            
-            Multithreading object = new Multithreading();
-            
+            Multithreading object = new Multithreading(requestTypeInteger);
             object.start();
+            threadCount.add(object);
+        }
+
+        for (Thread object: threadCount){
+            object.join();
+        }
+        long endTime = System.currentTimeMillis();
+        long totalTime = endTime - startTime;
+        recordLog(totalTime);
+        
+        long averageTime = totalTime / threadsInteger;
+        recordLog(averageTime);
+    }
+    static void recordLog(long totalTime){
+        try{
+            FileWriter logFileWriter = new FileWriter("log.txt", true);
+            logFileWriter.write("total time " + totalTime + " milliseconds\n");
+            logFileWriter.close();
+        } catch (IOException e){
+            System.out.println("An error occurred while writing to log file.");
+            e.printStackTrace();
         }
     }
 }
 
 class Multithreading extends Thread {
+    Integer requestTypeInteger;
+    
+    public Multithreading(Integer requestTypeInteger){
+        this.requestTypeInteger = requestTypeInteger;
+    }
+
     public void run(){
         try {
             
@@ -53,29 +85,27 @@ class Multithreading extends Thread {
             
             Integer userInput;
             String serverOutpuString;
-            
-            userInput = getRandomNumber(1,6);
+            userInput = requestTypeInteger;
+            // userInput = getRandomNumber(1,6);
 
             writer.println(userInput);
-            
             serverOutpuString = ReadBigString(reader);
-            
             System.out.println(serverOutpuString);
                 
             socket.close();
-            
             long endTime = System.currentTimeMillis();
             long totalTime = endTime - startTime;
 
             recordLog(totalTime);
             
-            System.out.println("Took " + totalTime + " milliseconds\n");
+            System.out.println(totalTime + " milliseconds\n");
 
         } catch (IOException e) {
             System.out.println("An error occurred while creating new thread.");
             e.printStackTrace();
         }
     }
+
     static void recordLog(long totalTime){
         try{
             FileWriter logFileWriter = new FileWriter("log.txt", true);

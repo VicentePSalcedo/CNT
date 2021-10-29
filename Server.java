@@ -98,7 +98,7 @@ public class Server {
         long usedMem=Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
         usedMemString = Long.toString(usedMem);
         System.out.println("Done.");
-        return "Memory usage request: " + usedMemString + "MB";
+        return "Memory usage request: " + usedMemString + "KB";
     }
 
     static String netStat(){
