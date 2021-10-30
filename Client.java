@@ -30,6 +30,7 @@ public class Client {
         Scanner scanner = new Scanner(System.in);
         System.out.println("How many threads would you like to spawn?");
         threadsInteger = scanner.nextInt();
+        
         Integer requestTypeInteger;
         System.out.println("What kind of requests?");
         requestTypeInteger = scanner.nextInt();

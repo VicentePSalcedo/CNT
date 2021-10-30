@@ -1,0 +1,22 @@
+439 milliseconds
+907 milliseconds
+1472 milliseconds
+1947 milliseconds
+2471 milliseconds
+2926 milliseconds
+3390 milliseconds
+3879 milliseconds
+4300 milliseconds
+4751 milliseconds
+5217 milliseconds
+5667 milliseconds
+6099 milliseconds
+6520 milliseconds
+6985 milliseconds
+7410 milliseconds
+7830 milliseconds
+8319 milliseconds
+8854 milliseconds
+9324 milliseconds
+total time 9351 milliseconds
+total time 467 milliseconds
