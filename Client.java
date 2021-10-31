@@ -26,8 +26,16 @@ public class Client {
             e.printStackTrace();
         }
         
-        Integer threadsInteger;
+        String IP;
         Scanner scanner = new Scanner(System.in);
+        System.out.println("What is the IP you would like to connect to?(Hint: \"localhost\"");
+        IP = scanner.nextLine();
+
+        Integer port;
+        System.out.println("Which port would you like to connect to?(Hint: \"6868\"");
+        port = scanner.nextInt();
+
+        Integer threadsInteger;
         System.out.println("How many threads would you like to spawn?");
         threadsInteger = scanner.nextInt();
         
@@ -39,7 +47,7 @@ public class Client {
         List<Thread> threadCount = new ArrayList<>();
         long startTime = System.currentTimeMillis();
         for (int threads = 0; threads < threadsInteger; threads++) {
-            Multithreading object = new Multithreading(requestTypeInteger);
+            Multithreading object = new Multithreading(requestTypeInteger,IP,port);
             object.start();
             threadCount.add(object);
         }
@@ -68,15 +76,18 @@ public class Client {
 
 class Multithreading extends Thread {
     Integer requestTypeInteger;
-    
-    public Multithreading(Integer requestTypeInteger){
+    String IP;
+    Integer port;
+    public Multithreading(Integer requestTypeInteger, String IP, Integer port){
         this.requestTypeInteger = requestTypeInteger;
+        this.IP = IP;
+        this.port = port;
     }
 
     public void run(){
         try {
             
-            Socket socket = new Socket("localhost", 6868);
+            Socket socket = new Socket(IP, port);
             long startTime = System.currentTimeMillis();
             InputStream input = socket.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
@@ -84,12 +95,8 @@ class Multithreading extends Thread {
             OutputStream output = socket.getOutputStream();
             PrintWriter writer = new PrintWriter(output, true);
             
-            Integer userInput;
             String serverOutpuString;
-            userInput = requestTypeInteger;
-            // userInput = getRandomNumber(1,6);
-
-            writer.println(userInput);
+            writer.println(requestTypeInteger);
             serverOutpuString = ReadBigString(reader);
             System.out.println(serverOutpuString);
                 
