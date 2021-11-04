@@ -1,3 +1,4 @@
+package WindowsServerDeployment;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
@@ -28,7 +29,7 @@ public class Client {
         
         String IP;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("What is the IP you would like to connect to?(Hint: \"139.62.210.153\")");
+        System.out.println("What is the IP you would like to connect to?(Hint: \"localhost\")");
         IP = scanner.nextLine();
 
         Integer port;
@@ -40,7 +41,7 @@ public class Client {
         threadsInteger = scanner.nextInt();
         
         Integer requestTypeInteger;
-        System.out.println("What kind of requests?");
+        System.out.println("What kind of requests?\n1 (Date and Time)\n2 (Uptime)\n3 (Memory Use)\n4 (Net Work Status)\n5 (Current Users)\n6 (Running Process)");
         requestTypeInteger = scanner.nextInt();
         scanner.close();
         
@@ -106,7 +107,7 @@ class Multithreading extends Thread {
 
             recordLog(totalTime);
             
-            System.out.println(totalTime + " milliseconds\n");
+            // System.out.println(totalTime + " milliseconds\n");
 
         } catch (IOException e) {
             System.out.println("An error occurred while creating new thread.");
