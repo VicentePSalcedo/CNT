@@ -28,11 +28,11 @@ public class Client {
         
         String IP;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("What is the IP you would like to connect to?(Hint: \"localhost\")");
+        System.out.println("What is the IP you would like to connect to?(Hint: \"139.62.210.153\")");
         IP = scanner.nextLine();
 
         Integer port;
-        System.out.println("Which port would you like to connect to?(Hint: \"6868\")");
+        System.out.println("Which port lswould you like to connect to?(Hint: \"1313\")");
         port = scanner.nextInt();
 
         Integer threadsInteger;

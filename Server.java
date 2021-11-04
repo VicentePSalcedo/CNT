@@ -14,8 +14,8 @@ public class Server {
         long startTime = System.currentTimeMillis();
         String serverOutputString;
         try {
-            ServerSocket serverSocket = new ServerSocket(6868);
-            System.out.println("Server is listening on port 6868");
+            ServerSocket serverSocket = new ServerSocket(1313);
+            System.out.println("Server is listening on port 1313");
             while (true) {
                 Socket socket = serverSocket.accept();
                 System.out.println("New client connected");
@@ -106,7 +106,7 @@ public class Server {
         String currentLine = "";
         String netStatString = "";
         try {
-            Process NetStat = Runtime.getRuntime().exec("netstat");
+            Process NetStat = Runtime.getRuntime().exec("netstat -a | less");
             BufferedReader reader = new BufferedReader(new InputStreamReader(NetStat.getInputStream()));
             while ((currentLine = reader.readLine()) != null) {
                 netStatString = netStatString + currentLine + "\n";
@@ -125,7 +125,7 @@ public class Server {
         String currentLine = "";
         String currentUserString = "";
         try{
-            Process CurrentUsers = Runtime.getRuntime().exec("WMIC /NODE:localhost COMPUTERSYSTEM GET USERNAME");
+            Process CurrentUsers = Runtime.getRuntime().exec("w");
             BufferedReader reader = new BufferedReader(new InputStreamReader(CurrentUsers.getInputStream()));
             while ((currentLine = reader.readLine()) != null){
                 currentUserString = currentUserString + currentLine + "\n";
@@ -143,7 +143,7 @@ public class Server {
         String currentLine = "";
         String runningProcessString = "";
         try {
-            Process RunningProcess = Runtime.getRuntime().exec("tasklist");
+            Process RunningProcess = Runtime.getRuntime().exec("ps");
             BufferedReader reader = new BufferedReader(new InputStreamReader(RunningProcess.getInputStream()));
             while ((currentLine = reader.readLine()) != null){
                 runningProcessString = runningProcessString + currentLine + "\n";
