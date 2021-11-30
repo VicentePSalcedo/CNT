@@ -58,15 +58,15 @@ public class Client {
         }
         long endTime = System.currentTimeMillis();
         long totalTime = endTime - startTime;
-        recordLog(totalTime);
+        recordLog(totalTime, "Total Time");
         
         long averageTime = totalTime / threadsInteger;
-        recordLog(averageTime);
+        recordLog(averageTime, "Average Time");
     }
-    static void recordLog(long totalTime){
+    static void recordLog(long totalTime, String timeType){
         try{
             FileWriter logFileWriter = new FileWriter("log.txt", true);
-            logFileWriter.write("total time " + totalTime + " milliseconds\n");
+            logFileWriter.write(timeType + totalTime + " milliseconds\n");
             logFileWriter.close();
         } catch (IOException e){
             System.out.println("An error occurred while writing to log file.");
