@@ -41,7 +41,7 @@ public class Client {
         threadsInteger = scanner.nextInt();
         
         Integer requestTypeInteger;
-        System.out.println("What kind of requests?\n1.Date and Time\n2.Uptime\n3.Memory Use\n4.Net Work Status\n5.Current Users\n6.Running Process");
+        System.out.println("What kind of requests?\n1 (Date and Time)\n2 (Uptime)\n3 (Memory Use)\n4 (Net Work Status)\n5 (Current Users)\n6 (Running Process)");
         requestTypeInteger = scanner.nextInt();
         scanner.close();
         
@@ -66,7 +66,7 @@ public class Client {
     static void recordLog(long totalTime, String timeType){
         try{
             FileWriter logFileWriter = new FileWriter("log.txt", true);
-            logFileWriter.write(timeType + totalTime + " milliseconds\n");
+            logFileWriter.write(timeType + " " + totalTime + " milliseconds\n");
             logFileWriter.close();
         } catch (IOException e){
             System.out.println("An error occurred while writing to log file.");
