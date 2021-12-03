@@ -66,7 +66,7 @@ public class Client {
     static void recordLog(long totalTime, String timeType){
         try{
             FileWriter logFileWriter = new FileWriter("log.txt", true);
-            logFileWriter.write(timeType + totalTime + " milliseconds\n");
+            logFileWriter.write(timeType + " " + totalTime + " milliseconds\n");
             logFileWriter.close();
         } catch (IOException e){
             System.out.println("An error occurred while writing to log file.");

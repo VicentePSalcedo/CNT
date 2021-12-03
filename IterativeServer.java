@@ -15,31 +15,35 @@ public class IterativeServer {
         long startTime = System.currentTimeMillis();
         String serverOutputString;
         try {
-            ServerSocket serverSocket = new ServerSocket(1313);
-            System.out.println("Server is listening on port 1313");
-            while (true) {
-                Socket socket = serverSocket.accept();
-                System.out.println("New client connected");
+            try (ServerSocket serverSocket = new ServerSocket(1313)) {
+                System.out.println("Server is listening on port 1313");
+                while (true) {
+                    Socket socket = serverSocket.accept();
+                    System.out.println("New client connected");
 
-                InputStream input = socket.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+                    InputStream input = socket.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
-                OutputStream output = socket.getOutputStream();
-                PrintWriter writer = new PrintWriter(output, true);
-                
-                String userInputString;
-                Integer userInputInteger;
-
-                userInputString = reader.readLine();
+                    OutputStream output = socket.getOutputStream();
+                    PrintWriter writer = new PrintWriter(output, true);
                     
-                userInputInteger = Integer.parseInt(userInputString);
+                    String userInputString;
+                    Integer userInputInteger;
 
-                serverOutputString = optionLogic(userInputInteger, startTime);
+                    userInputString = reader.readLine();
+                        
+                    userInputInteger = Integer.parseInt(userInputString);
 
-                writer.println(serverOutputString);
-                
-                socket.close();
-                System.out.println("Client disconected.");
+                    serverOutputString = optionLogic(userInputInteger, startTime);
+
+                    writer.println(serverOutputString);
+                    
+                    socket.close();
+                    System.out.println("Client disconected.");
+                }
+            } catch (NumberFormatException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
         } catch (IOException e) {
             System.out.println("An error occured while establishing a new client connection.");

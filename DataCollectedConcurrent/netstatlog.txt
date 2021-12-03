@@ -1,0 +1,22 @@
+30096 milliseconds
+30161 milliseconds
+30177 milliseconds
+30203 milliseconds
+30211 milliseconds
+30238 milliseconds
+30256 milliseconds
+30261 milliseconds
+30264 milliseconds
+30268 milliseconds
+30270 milliseconds
+30275 milliseconds
+30279 milliseconds
+30285 milliseconds
+30283 milliseconds
+30291 milliseconds
+30295 milliseconds
+30298 milliseconds
+30300 milliseconds
+30302 milliseconds
+Total Time 30324 milliseconds
+Average Time 1516 milliseconds

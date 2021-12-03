@@ -1,0 +1,22 @@
+26 milliseconds
+27 milliseconds
+27 milliseconds
+38 milliseconds
+40 milliseconds
+43 milliseconds
+50 milliseconds
+53 milliseconds
+58 milliseconds
+66 milliseconds
+68 milliseconds
+68 milliseconds
+79 milliseconds
+79 milliseconds
+81 milliseconds
+81 milliseconds
+85 milliseconds
+88 milliseconds
+88 milliseconds
+91 milliseconds
+Total Time 116 milliseconds
+Average Time 5 milliseconds

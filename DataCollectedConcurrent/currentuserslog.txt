@@ -1,0 +1,22 @@
+276 milliseconds
+372 milliseconds
+418 milliseconds
+423 milliseconds
+427 milliseconds
+439 milliseconds
+437 milliseconds
+458 milliseconds
+461 milliseconds
+472 milliseconds
+476 milliseconds
+480 milliseconds
+480 milliseconds
+498 milliseconds
+506 milliseconds
+514 milliseconds
+524 milliseconds
+527 milliseconds
+531 milliseconds
+534 milliseconds
+Total Time 559 milliseconds
+Average Time 27 milliseconds

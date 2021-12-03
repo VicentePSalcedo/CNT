@@ -14,13 +14,13 @@ public class Server {
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
         try {
-            ServerSocket serverSocket = new ServerSocket(1313);
-            System.out.println("Server is listening on port 1313");
-            while (true) {
-
-                Socket socket = serverSocket.accept();
-                System.out.println("New client connected");
-                new ServerThread(socket,startTime).start();
+            try (ServerSocket serverSocket = new ServerSocket(1313)) {
+                System.out.println("Server is listening on port 1313");
+                while (true) {
+                    Socket socket = serverSocket.accept();
+                    System.out.println("New client connected");
+                    new ServerThread(socket,startTime).start();
+                }
             }
         } catch (IOException e) {
             System.out.println("An error occured while establishing a new client connection.");
@@ -143,7 +143,7 @@ class ServerThread extends Thread {
         String currentLine = "";
         String currentUserString = "";
         try{
-            Process CurrentUsers = Runtime.getRuntime().exec("query user");
+            Process CurrentUsers = Runtime.getRuntime().exec("whoami");
             BufferedReader reader = new BufferedReader(new InputStreamReader(CurrentUsers.getInputStream()));
             while ((currentLine = reader.readLine()) != null){
                 currentUserString = currentUserString + currentLine + "\n";
